@@ -1,0 +1,16 @@
+body {
+    background-image: url("../images/pirate_background.jpg");
+}
+ .container {
+ 	width: 50%;
+ 	margin: 20% auto;
+ 	text-align: center;
+ 	background: Tan;
+ 	padding: 2rem;
+ }
+
+ li {
+ 	list-style: none;
+ 	line-height: 2;
+ }
+ 
