@@ -24,34 +24,41 @@ console.log(questions);
 
 var currentQuestion = -1;
 
-function nextQuestion(){
-	currentQuestion++
-	if (currentQuestion == questions.length) {
+
+
+function nextQuestion() {
+    currentQuestion++
+    if (currentQuestion == questions.length) {
         return
     }
 
- var question = questions[currentQuestion];
- var $page = $('.question-page');
+
+    var question = questions[currentQuestion];
+    var $page = $('.question-page');
     $page.find('.title').text(question.title);
     var $answers = $page.find('.answers');
     $answers.empty();
     question.answers.forEach(function(answer, index) {
         $answers.append('<li><input type ="radio" name ="answer" value="' + index + '" required />' + '  ' + answer + '</li>');
-})
+    })
+
 }
+
 
 
 $('.question-page').on('submit', function(event) {
     event.preventDefault();
-    getPreference(); 
-}) 
+    nextQuestion();
 
-nextQuestion();
+})
+
+
 
 function getPreference() {
     var question = questions[currentQuestion]
     var preference = $('.answers').find('input:checked').val()
 
-   }
+}
 
-
+getPreference();
+console.log(preference);
