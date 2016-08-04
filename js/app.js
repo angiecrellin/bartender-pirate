@@ -1,3 +1,5 @@
+
+
 //questions
 
 
@@ -25,20 +27,29 @@ console.log(questions);
 
 //ingredients
 
-var pantry = 
+var pantry = {
 
-    ['glug of rum', 'slug of whiskey', 'splash of gin',
-    'olive on a stick', 'salt-dusted rim', 'rasher of bacon',
-    'shake of bitters', 'spalsh of tonic', 'twist of lemon peel',
-    'sugar cube', 'spoonful of honey', 'splash of cola',
-    'slice of orange', 'dash of cassis', 'cherry on top']
+    strong:['glug of rum', 'slug of whiskey', 'splash of gin'],
+    salty: ['olive on a stick', 'salt-dusted rim', 'rasher of bacon'],
+    bitter:['shake of bitters', 'spalsh of tonic', 'twist of lemon peel'],
+    sweet:['sugar cube', 'spoonful of honey', 'splash of cola'],
+    fruity:['slice of orange', 'dash of cassis', 'cherry on top']
+    
+};
 
+//constructor for chosen ingredients
 
-console.log(panty);
+var Order = function(orderIngredients){
 
-//construct object 
+	this.strong = orderIngredients;
+	this.salty = orderIngredients;
+	this.bitter = orderIngredients;
+	this.sweet = orderIngredients;
+	this.fruity = orderIngredients;
 
+};
 
+hideDrinkOrder();
 
 
 
@@ -77,7 +88,19 @@ $('.question-page').on('submit', function(event) {
 function getPreference() {
     var question = questions[currentQuestion]
     var preference = $('.answers').find('input:checked').val()
-
+    console.log(preference);
 }
 
-console.log(preference);
+function hideDrinkOrder () {
+	$('.drinkOrder').hide();
+}
+
+function showDrinkOrder () {
+	$('.drinkOrder').show();
+}
+
+
+
+// loop through questions randomly picking an ingredient for each category answered 'aye' (at least two ingredients)
+
+//append .drinkName li with those ingredients
