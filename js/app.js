@@ -20,10 +20,29 @@ var questions = [{
 
 ];
 
+
 console.log(questions);
 
-var currentQuestion = -1;
+//ingredients
 
+var pantry = 
+
+    ['glug of rum', 'slug of whiskey', 'splash of gin',
+    'olive on a stick', 'salt-dusted rim', 'rasher of bacon',
+    'shake of bitters', 'spalsh of tonic', 'twist of lemon peel',
+    'sugar cube', 'spoonful of honey', 'splash of cola',
+    'slice of orange', 'dash of cassis', 'cherry on top']
+
+
+console.log(panty);
+
+//construct object 
+
+
+
+
+
+var currentQuestion = -1
 
 
 function nextQuestion() {
@@ -49,6 +68,7 @@ function nextQuestion() {
 $('.question-page').on('submit', function(event) {
     event.preventDefault();
     nextQuestion();
+    getPreference();
 
 })
 
@@ -60,5 +80,4 @@ function getPreference() {
 
 }
 
-getPreference();
 console.log(preference);
