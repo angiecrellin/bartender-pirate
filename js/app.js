@@ -5,19 +5,25 @@
 
 var questions = [{
         title: 'Do ye like yer drinks strong?',
-        answers: ['aye', 'nay']
+        answers: ['aye', 'nay'],
+        ingredient: 'strong'
     }, {
         title: 'Do ye like it with a salty tang?',
-        answers: ['aye', 'nay']
+        answers: ['aye', 'nay'],
+        ingredient: 'salty'
     }, {
         title: 'Are ye a lubber who likes it bitter?',
-        answers: ['aye', 'nay']
+        answers: ['aye', 'nay'],
+        ingredient: 'bitter'
+
     }, {
         title: 'Would ye like a bit of sweetness with yer poison?',
-        answers: ['aye', 'nay']
+        answers: ['aye', 'nay'],
+        ingredient:'sweet'
     }, {
         title: 'Are ye one for a fruity finish?',
-        answers: ['aye', 'nay']
+        answers: ['aye', 'nay'],
+        ingredient: 'fruity'
     },
 
 ];
@@ -39,26 +45,35 @@ var pantry = {
 
 //constructor for chosen ingredients
 
-var Order = function(orderIngredients){
-
-	this.strong = orderIngredients;
-	this.salty = orderIngredients;
-	this.bitter = orderIngredients;
-	this.sweet = orderIngredients;
-	this.fruity = orderIngredients;
-
+var Order = function(){
+	this.order=[]	
 };
+
+Order.prototype.addIngredient=function(category){
+	var ingredients = pantry[category]
+	var randomId = Math.floor(Math.random() * ingredients.length)
+	this.order.push(ingredients[randomId])
+}
+Order.prototype.getFinalOrder=function(){
+	if (this.order.length === 0){
+		return 'You didn\'t pick anything!'
+	}
+	return this.order.join(', ')
+}
+var order = new Order 
 
 hideDrinkOrder();
 
 
 
 var currentQuestion = -1
+nextQuestion();
 
 
 function nextQuestion() {
     currentQuestion++
     if (currentQuestion == questions.length) {
+    	showDrinkOrder();
         return
     }
 
@@ -78,9 +93,9 @@ function nextQuestion() {
 
 $('.question-page').on('submit', function(event) {
     event.preventDefault();
-    nextQuestion();
+    
     getPreference();
-
+    nextQuestion();
 })
 
 
@@ -89,15 +104,40 @@ function getPreference() {
     var question = questions[currentQuestion]
     var preference = $('.answers').find('input:checked').val()
     console.log(preference);
+    if (preference === '0') {
+    	order.addIngredient(question.ingredient);
+    console.log(order.order);
+    }
+
+
 }
+
 
 function hideDrinkOrder () {
 	$('.drinkOrder').hide();
 }
 
 function showDrinkOrder () {
+	hideQuestions();
+	$('.drinkOrder').find('.drinkName').text(order.getFinalOrder());
 	$('.drinkOrder').show();
+
 }
+function hideQuestions () {
+	$('.question-page').hide();
+}
+function showQuestions() {
+	$('.question-page').show()
+}
+function newOrder () {
+	hideDrinkOrder();
+	showQuestions();
+	order = new Order
+	currentQuestion = -1
+	nextQuestion();
+}
+$('.newOrder').on('click', newOrder)
+
 
 
 
